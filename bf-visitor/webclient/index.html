@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="it" class="community-no-js">
+<head>
+<!-- @date 01 10 2024
+       @author Duilio Peroni
+       @copyright https://creativecommons.org/licenses/by-sa/4.0/
+-->
+<meta charset="UTF-8">
+<link rel="manifest" href="/bf-visitor/webclient/manifest.json">
+<link rel="apple-touch-icon" href="images/152x152.png">
+<meta name="apple-mobile-web-app-capable" content="yes"> 
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="BF-Visitor">
+<meta name="application-name" content="BF-Visitor" />
+<meta name="msapplication-TileImage" content="images/144x144.png"> 
+<title>Belluzzi Fioravanti Open Day Visitor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/w3.css" rel="stylesheet">
+<script src="vendor/jquery/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<div class="w3-container w3-center w3-sand">
+  <h3 style="font-weight:bold;" class="w3-text-deep-purple "><span style="font-size:75%">IIS Belluzzi Fioravanti</span><br><span style="font-size:125%">Open Day 2024</span></h3>
+</div>
+<!-- <div id="content"> -->
+<div id="contenitore">
+<!-- comandi: sempre visibile -->
+ <div id="commands" class="w3-row">
+  <div style="margin-bottom:5px; margin-top:10px; "  class="w3-col  l3 m3 s3  w3-center "><button onclick="info()">Info</button></div>
+  <div style="margin-bottom:5px; margin-top:10px; "  class="w3-col  l3 m3 s3  w3-center "><button onclick="aiuto()">Aiuto</button></div>
+  <div style="margin-bottom:5px; margin-top:10px; "  class="w3-col  l3 m3 s3  w3-center "><button onclick="reset()">Reset</button></div>
+  <div style="margin-bottom:5px; margin-top:10px; "  class="w3-col  l3 m3 s3  w3-center "><button onclick="chiudi()">Chiudi</button></div>
+  <div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div> 
+<!-- tools -->
+<!-- visibile solo quando richiesta info -->
+<div style="display:none;"  id="info" class="w3-row">
+<div style="margin-bottom:5px" class="w3-col  l12 m12 s12  w3-center "><h3><b>Informazioni su ...</b></h3></div>
+<div style="margin-bottom:5px;padding:5px;" class="w3-col l12 m12 s12  w3-center">BF-Visitor  è realizzato da IIS Belluzzi Fioravanti  e rilasciato con licenza MIT, derivato Code Hunting Games rilasciato con licenza MIT da CODEMOOC.<br>Sviluppato dagli studenti del corso co-curricolare PNRR "Progressive Web Application". Tutor Francesco Pizzuti, esperti esterni Gianni Ragno e Duilio Peroni.</div> 
+<div style="margin-bottom:5px" class="w3-col l12 m12 s12  w3-center"><input type="button" onclick="closeInfo()" value="Torna ad home"></div> 
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando richiesta aiuto -->
+<div style="display:none;"  id="aiuto" class="w3-row">
+<div style="margin-bottom:5px" class="w3-col  l12 m12 s12  w3-center "><h3><b>Regole del gioco</b></h3></div>
+<div style="margin-bottom:5px;padding:5px;" class="w3-col l12 m12 s12  w3-left">
+<details>
+  <summary><b><span style="color:blue">Cosa è  BF-Visitor</span></b></summary>
+  <p>BF-Visitor è una web app che guida i visitatori nella visita dell'Open Day di IIS Belluzzi Fioravanti.<br>E' molto semplice da usare e non richiede alcuna installazione. Si utilizza  uno smartphone dotato di connessione dati, GPS e fotocamera.<br>BF-Visitor è una web app di tipo PWA quindi si può utilizzare come una normale pagina web oppure come un'app. Per installarla come app sullo smartphone si deve visitare la pagina web con un browser derivato da Chromium (ad esempio Chrome) e nel menu principale del browser selezionare la voce "Aggiungi a schermata Home" e successivamente selezionare l'opzione "Installa"</p>
+</details>
+<details>
+  <summary><b><span style="color:blue">Come si utilizza</span></b></summary>
+  <p>L'app guida il visitatore attraverso i laboratori dell'Istituto dove sono allestite dimostrazioni da parte degli studenti e dei docenti. Per avviare l'app si deve scansionare con la videocamera il QRCode di avvio. L'app, dopo aver registrato il proprio nome, propone una lista di laboratori visitabili. Scegliendo un laboratorio viene fornita una mappa geolocalizzata ed una foto del laboratorio. Guidati dalla mappa geolocalizzata si può raggiungere il laboratorio e verificare la correttezza scansionando un QRCode presente in ogni laboratorio. L'app fornisce informazioni sul laboratorio tratte dal sito di orientamento; al termine della presentazione di studenti e docenti è possibile inserire una breve commento all'attività presentata.<br>Tornando alla lista dei laboratori visitabili, i laboratori già visitati risultano spuntati<br>E' possibile visitare un qualsiasi numero di laboratori ed in un qualsiasi ordine..</p>
+</details>
+<details>
+  <summary><b><span style="color:blue">Commento alla presentazione</span></b></summary>
+  <p>E' molto gradito l'inserimento di un commento da parte dei visitatori dopo ogni visita in laboratorio.<br>I vostri commenti ci aiuteranno a migliorare!</p>
+</details>
+</div> 
+<div style="margin-bottom:5px" class="w3-col l12 m12 s12  w3-center"><input type="button" onclick="closeHelp()" value="Torna ad home"></div> 
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando richiesta reset -->
+<div style="display:none;"  id="reset" class="w3-row">
+<div style="margin-bottom:5px" class="w3-col  l12 m12 s12  w3-center "><h3><b>Reset visita</b></h3></div>
+<div style="margin-bottom:5px" class="w3-col l4 m4 s12  w3-center">Sicuro di voler resettare la visita?</div> 
+<div style="margin-bottom:5px" class="w3-col l12 m12 s12  w3-center"><input type="button" onclick="closeReset()" value="Reset e vai a una nuova visita"></div> 
+<div style="margin-bottom:5px" class="w3-col l12 m12 s12  w3-center"><input type="button" onclick="abandonReset()" value="Torna alla visita in corso"></div> 
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<div id="container" style="display:block">
+<!-- visibile solo quando configurato -->
+ <div  style="display:none;" id="userdata" class="w3-row">
+  <div class="w3-col  l12 m12 s12  w3-center "><h3 style="text-align:center !important;font-weight:bold;" class="w3-text-deep-purple"><span  id="nteam"></span></h3></div>
+<!--  <div class="w3-col  l6 m6 s6  w3-center" ><h3 style="text-align:left !important;font-weight:lighter;" class="w3-text-deep-purple"><span  id="comp"></span></h3></div>-->
+  <div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div> 
+<!-- visibile solo quando non configurato -->
+<div style="display:none;" id="usermodule" class="w3-row">
+<div style="margin-bottom:5px;padding:5px;" class="w3-col  l12 m12 s12  w3-center "><h3><b><span style="font-size:125%">Visita i laboratori</span><br>Scopri l’affascinante mondo della tecnologia guidato da questa app!</b></h3></div>
+<div style="margin-bottom:5px" class="w3-col l6 m6 s12  w3-center">Nome visitatore: <input id='team' name='team'></div> 
+<input type="hidden" id='ncomp' name='ncomp' value="1">
+<!-- <div style="margin-bottom:5px" class="w3-col l4 m4 s12  w3-center">Numero componenti (min:1, max:5): <input id='ncomp' name='ncomp'></div>  -->
+<div style="margin-bottom:5px" class="w3-col l6 m6 s12  w3-center"><input type="button" onclick="registerUser()" value="Registrati"></div> 
+<div id="errmod" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-center"><span style="color:red;" id="errmsg"></span></div> 
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando richiesta scelta laboratorio -->
+<div style="display:none;"  id="checklist" >
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div   class="w3-col  l12 m12 s12  w3-left"><h4><b>Tecnico</b></h4></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk0" name="chk0" checked onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Chimica, materiali e biotecnologie - Chimica e materiali</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt0"onclick="reqArt(0)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk1" name="chk1" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Chimica, materiali e biotecnologie - Biotecnologie ambientali</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt1"onclick="reqArt(1)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk2" name="chk2" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Elettronica e automazione - Elettronica</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt2"onclick="reqArt(2)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk3" name="chk3" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Elettronica e automazione - Automazione</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt3"onclick="reqArt(3)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk4" name="chk4" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Informatica e telecomunicazioni - Informatica</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt4"onclick="reqArt(4)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk55" name="chk5" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Informatica e telecomunicazioni - Telecomunicazioni</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt5"onclick="reqArt(5)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk6" name="chk6" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Meccanica, meccatronica ed energia - Meccanica e meccatronica</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt6"onclick="reqArt(6)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk7" name="chk7" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Trasporti e logistica - Logistica</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt7"onclick="reqArt(7)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div   class="w3-col  l12 m12 s12  w3-left"><h4><b>Professionale</b></h4></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk8" name="chk8" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Manutenzione ed assistenza tecnica - Manutenzione e riparazione di autoveicoli</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt8"onclick="reqArt(8)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk9" name="chk9" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Manutenzione ed assistenza tecnica - Installazione di impianti elettrici, idraulici ed altri lavori di costruzione e installazione</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt9"onclick="reqArt(9)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk10" name="chk10" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Industria e artigianato per il made in Italy</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt10"onclick="reqArt(10)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk11" name="chk11" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Manutenzione ed assistenza tecnica serale - Apparati, impianti e servizi tecnici industriali e civili</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt11"onclick="reqArt(11)" value="Vai"></div></div>
+<div style="padding:4px;border:1px solid black;" class="w3-row"><div  class="w3-col  l1 m1 s1  w3-left"><input style="accent-color: green;" type="checkbox" id="chk12" name="chk12" onclick="return false;"></div><div  class="w3-col  l10 m10 s9  w3-left ">Manutenzione ed assistenza tecnica serale - Manutenzione mezzi di trasporto</div><div  class="w3-col  l1 m1 s1  w3-left"><input type="button" id="reqArt12"onclick="reqArt(12)" value="Vai"></div></div>
+</div>
+</div>
+<div style="display:none;"  id="quiz" class="w3-row">
+  <div id="first" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-center"><span class="w3-text-deep-purple " id="firstmsg"></span><hr style="border-top: 1px solid #aaa !important"></div>
+  <div class="w3-col  l4 m6 s12 w3-center "><img style="border: 1px solid #aaa;" width="80%" id="quizimg" src="" title="Quiz image" alt="Quiz image" ></div>
+  <div class="w3-col  l8 m6 s12 ">
+  <p id="quiztext"></p>
+  <!-- <p id="anserfield">Risposta: <input id='answer' name='answer'></p> -->
+  <!--  <p id="anserfield">Risposta: <select name='answer' id='answer'><option value="a">a</option><option value="b">b</option><option value="c">c</option></select></p> -->
+  <p id="anserfield"><label for="answer">Risposta: </label><select size="1" name="answer" id="answer">   <option value="" >Scegli un’opzione</option><option value="a">a</option><option value="b">b</option><option value="c">c</option></select></p>
+  <p id="subfield"><input class="button" type="button" onclick="sendAnswer()"value="Invia"></p>
+  </form>
+  <p id="quizerr" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-left"><span class="w3-text-red b" id="quizerrmsg"></span></div>
+  <div id="qerrmod" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-center"><span style="color:red;" id="qerrmsg"></span></div>   
+  <div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando richiesta ricerca tappa -->
+<div style="display:none;"  id="map" class="w3-row">
+<div id="scanerr" style="margin-bottom:5px; display:none" class="w3-col  l12 m12 s12  w3-center "><h5 style="color:red"><b>Sembra che tu abbia scansionato il QR Code sbagliato! Forse sei finito nel posto sbagliato!</b></h5></div>
+<div id="quizok"  style="margin-bottom:5px; display:none" class="w3-col  l12 m12 s12  w3-center "><h5"><b>Risposta esatta!</b></h5></div>
+<div id="lastloc" style="margin-bottom:5px; display:none" class="w3-col  l12 m12 s12  w3-center "><h5 ><b>Manca pochissimo alla conclusione della gara … raggiungi l’ultima tappa!</b></h5></div>
+<div style="margin-bottom:5px" class="w3-col  l4 m12 s12  w3-center "><h3><b>Raggiungi il punto assegnato e trova il QR Code!</b></h3></div>
+<div style="margin-bottom:5px" class="w3-col  l4 m12 s12  w3-center w3-sand "><h3><b><span id="loc"></span></b></h3></div>
+<div style="margin-bottom:5px" class="w3-col  l4 m12 s12  w3-center "><h3><b><input type="button" onclick="scanQR()" value="Scansiona QR"></b></h3></div>
+<div class="w3-col  l6 m6 s12 w3-center "><iframe id="mapframe" width="80%" height="400" src="" title=""></iframe></div>
+<div  class="w3-col  l6 m6 s12 w3-center "><img style="border:1px black solid" height="400" width="606" id="mapimg" src="" title="Loc image" alt="Loc image" ></div>
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando richiesta scansione -->
+<div style="display:none;"  id="scan" class="w3-row">
+<div class="w3-col  l12 m12 s12 w3-center "><div id="video-container"><video width="70%" id="qr-video"></video></div></div>
+<div class="w3-col  l12 m12 s12 w3-center "><b>QR code: </b><span id="cam-qr-result">None</span></div>
+<div id="merrmod" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-center"><span style="color:red;" id="merrmsg"></span></div>   
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<!-- visibile solo quando emesso certificato -->
+<div style="display:none;"  id="cert" class="w3-row">
+<div style="margin-bottom:5px;" class="w3-col l12 m12 s12  w3-center"><h3><b>Ecco il tuo certificato!</b></h3></div>   
+<div class="w3-col  l12 m12 s12 w3-center ">
+<object id="certobj" data="" type="application/pdf" width="800" height="567">
+<a id="certlnk" href="">Scarica il certificato in formato PDF</a>
+</object>
+</div>
+<div id="cerrmod" style="margin-bottom:5px; display:none;" class="w3-col l12 m12 s12  w3-center"><span style="color:red;" id="cerrmsg"></span></div>   
+<div class="w3-col  l12 m12 s12  w3-center "><hr style="border-top: 1px solid #aaa !important"></div>
+</div>
+<script async>
+window.onload = () => {
+	'use strict'; 
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('./service-worker.js');
+		console.log("serviceWorker register");
+	}
+}
+// This variable will save the event for later use.
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevents the default mini-infobar or install dialog from appearing on mobile
+  e.preventDefault();
+  // Save the event because you'll need to trigger it later.
+  deferredPrompt = e;
+  // Show your customized install prompt for your PWA
+  // Your own UI doesn't have to be a single element, you
+  // can have buttons in different locations, or wait to prompt
+  // as part of a critical journey.
+  showInAppInstallPromotion();
+});
+function showInAppInstallPromotion(){
+	alert("Questa app può essere installata sul tuo device, apri il menu del browser e scegli la voce 'Installa App'.");
+}
+</script>
+<script type="module">
+    var qrcode="";
+    import QrScanner from "./vendor/scanner/qr-scanner.min.js";
+    const video = document.getElementById('qr-video');
+    const videoContainer = document.getElementById('video-container');
+    const camQrResult = document.getElementById('cam-qr-result');
+    function setResult(label, result) {
+        //console.log(result.data);
+        //label.textContent = result.data;
+		qrcode=result.data;
+		if(qrcode !="No QR code found"){
+			console.log(qrcode);
+			console.log("trovato QR!");
+			scanner.stop();
+			if(qrcode==code){
+				console.log("correct");
+				label.textContent = result.data+ " ok";
+//				if(state==7) {
+//					reqCertificate();
+//				}
+//				else {
+					reqLocData();
+//				}	
+			}
+			else {
+				console.log("fault");			
+				label.textContent = result.data+ " ko";
+				scanErrorMode();
+			}
+		}
+    }
+    // ####### Web Cam Scanning #######
+    const scanner = new QrScanner(video, result => setResult(camQrResult, result), {
+        onDecodeError: error => {
+            camQrResult.textContent = error;
+            camQrResult.style.color = 'inherit';
+        },
+        highlightScanRegion: true,
+        highlightCodeOutline: true,
+    });
+    //temporaneo scanner.start();
+    // for debugging
+    window.scanner = scanner;
+</script>
+<script>
+//variabili CTH
+var thid="";
+var team="";
+var ncomp="";
+var state="";
+var lang="it";
+var question="";
+var correct="";
+var sugg="";
+var img="";
+var lat="";
+var lng="";
+var loc="";
+var code="";
+var cert="";
+var time="";
+var mode=""; //""=not registered,1=quiz mode, 2=loc mode, 3=certificate mode
+var art="";
+var interval=null;
+var visits=[0,0,0,0,0,0,0,0,0,0,0,0,0];
+var opinions=["","","","","","","","","","","","",""];
+const daysToExpire = new Date(2147483647 * 1000).toUTCString();
+var baseurl="https://localhost/bf-visitor/";
+// main script ----------------------    
+console.log("Main start");
+mainCheckCookie()
+console.log(document.cookie);
+console.log("thid:"+thid);
+console.log("team:"+team);
+console.log("ncomp:"+ncomp);
+console.log("state:"+state);
+console.log("question:"+question);
+console.log("correct:"+correct);
+$("#nteam").html(team);
+mainCheckState();
+interval=setInterval(eachsecond, 1000);
+// main script end ------------------    
+// cookie management ----------------
+function mainCheckCookie(){
+	if (checkACookieExists("thid")){
+		thid=getCookieValue("thid");
+	}
+	else {
+		setCookieValue("thid","");
+	}
+	if (checkACookieExists("team")){
+		team=getCookieValue("team");
+	}
+	else {
+		setCookieValue("team","");
+	}
+	if (checkACookieExists("ncomp")){
+		ncomp=getCookieValue("ncomp");
+	}
+	else {
+		setCookieValue("ncomp","");
+	}
+	if (checkACookieExists("state")){
+		state=getCookieValue("state");
+	}
+	else {
+		setCookieValue("state","");
+	}
+	if (checkACookieExists("lang")){
+		lang=getCookieValue("lang");
+	}
+	else {
+		setCookieValue("lang","it");
+	}
+	if (checkACookieExists("correct")){
+		correct=getCookieValue("correct");
+	}
+	else {
+		setCookieValue("correct","");
+	}
+	if (checkACookieExists("question")){
+		question=getCookieValue("question");
+	}
+	else {
+		setCookieValue("question","");
+	}
+	if (checkACookieExists("sugg")){
+		sugg=getCookieValue("sugg");
+	}
+	else {
+		setCookieValue("sugg","");
+	}
+	if (checkACookieExists("img")){
+		img=getCookieValue("img");
+	}
+	else {
+		setCookieValue("img","");
+	}
+	if (checkACookieExists("lat")){
+		lat=getCookieValue("lat");
+	}
+	else {
+		setCookieValue("lat","");
+	}
+	if (checkACookieExists("lng")){
+		lng=getCookieValue("lng");
+	}
+	else {
+		setCookieValue("lng","");
+	}
+	if (checkACookieExists("loc")){
+		loc=getCookieValue("loc");
+	}
+	else {
+		setCookieValue("loc","");
+	}
+	if (checkACookieExists("code")){
+		code=getCookieValue("code");
+	}
+	else {
+		setCookieValue("code","");
+	}	
+	if (checkACookieExists("cert")){
+		cert=getCookieValue("cert");
+	}
+	else {
+		setCookieValue("cert","");
+	}	
+	if (checkACookieExists("time")){
+		time=getCookieValue("time");
+	}
+	else {
+		setCookieValue("time","");
+	}
+	if (checkACookieExists("mode")){
+		mode=getCookieValue("mode");
+	}
+	else {
+		setCookieValue("mode","");
+	}	
+	if (checkACookieExists("art")){
+		mode=getCookieValue("art");
+	}
+	else {
+		setCookieValue("art","");
+	}		
+	
+	if (checkACookieExists("visits")){
+		visits= JSON.parse(getCookieValue("visits"));
+	}
+	else {
+		setCookieValue("visits",JSON.stringify(visits));
+	}	
+	if (checkACookieExists("opinions")){
+		opinions= JSON.parse(getCookieValue("opinions"));
+	}
+	else {
+		setCookieValue("opinions",JSON.stringify(opinions));
+	}	
+}
+function checkACookieExists(key) {
+  if (document.cookie.split(';').some((item) => item.trim().startsWith(key+'='))) {
+      return true;
+  }
+  return false;
+}
+function getCookieValue(key){
+  return document.cookie.split(';').find((item) => item.trim().startsWith(key+'='))?.split('=')[1];
+}
+function setCookieValue(key,value){
+    document.cookie = key+"="+value+"; expires="+daysToExpire+"; SameSite=None; Secure";
+}
+// cookie management end ------------
+function mainCheckState(){
+    console.log(">>>State:"+state+"<<<");
+    console.log(">>>Mode:"+mode+"<<<");
+	if (thid.length === 0) {
+		notRegisteredMode();
+	}
+	switch (state){
+		case "":
+			notRegisteredMode();
+			break;
+		case "0":
+			switch(mode){
+				case "1":
+					checklistMode();
+					$("#userdata").css("display", "block");
+					$("#quiz").css("display", "block");
+				break;
+				case "2":
+					nextLocMode();
+				break;
+			}	
+			break;
+		case "1":
+		case "2":
+		case "3":
+		case "4":
+		case "5":
+		case "6":
+			switch(mode){
+				case "1":
+					nextQuizMode();
+					$("#userdata").css("display", "block");
+					$("#quiz").css("display", "block");					
+				break;
+				case "2":
+					nextLocMode();
+				break;
+			}
+			break;
+		case "7":
+			switch(mode){
+				case "1":
+					nextQuizMode();
+					$("#userdata").css("display", "block");
+					$("#quiz").css("display", "block");					
+				break;
+				case "2":
+					$("#quizok").css("display", "none");
+					lastLocMode();
+				break;
+			}
+			break;
+		case "8":
+			certificateMode();
+			break;
+		case "9":
+			pinReceivedMode();
+			break;
+	}
+}
+function notRegisteredMode(){
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#userdata").css("display", "none");
+	$("#usermodule").css("display", "block");
+	$("#quiz").css("display", "none");
+	$("#map").css("display", "none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	console.log("not registered");
+}
+function checklistMode(){
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+//	$("#firstmsg").html("<b>Ciao, "+team+", benvenuto in Marconi Wireless Game<br>Per essere certo che saprai rispondere alle domande di storia delle comunicazioni che troverai durante il gioco, ti farò una domanda semplice semplice per iniziare.</b>");		
+//	$("#first").css("display", "block");
+//	$("#quizimg").attr("src",img);
+//	$("#quiztext").html(question);
+	$("#checklist").css("display", "block");
+//	$("#errmod").css("display", "none");	
+//	$("#map").css("display", "none");
+//	$("#scan").css("display", "none");
+//	$("#cert").css("display", "none");
+    $("#quiz").css("display", "none");
+	console.log("first quiz");
+}
+function nextQuizMode(){
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#firstmsg").html("<b>Bravo, hai trovato il posto giusto!<br>Scrivi la risposta a questo quesito.</b>");		
+	$("#first").css("display", "block");
+	$("#quizimg").attr("src",img);
+	$("#quiztext").html(question);
+	$("#quiz").css("display", "block");
+	$("#errmod").css("display", "none");	
+	$("#map").css("display", "none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	console.log("next quiz");
+}
+function nextLocMode(){
+	console.log(state);
+	console.log(img);
+	console.log(lat);
+	console.log(lng);
+	console.log(loc);
+	console.log(code);
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#scanerr").css("display", "none");
+	$("#checklist").css("display", "none");
+	$("#map").css("display", "block");
+	//visual mappa
+	$("#mapframe").attr('src',"//maps.google.com/maps?q=@"+lat+", "+lng+"&z=18&t=k&output=embed");
+	$("#mapimg").attr('src',img);
+	$("#mapimg").attr('title',loc);
+	$("#mapimg").attr('alt',loc);
+	$("#loc").html(loc);
+	$("#lastloc").css("display","none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	console.log("next loc");
+}
+function lastLocMode(){
+	console.log(state);
+	console.log(img);
+	console.log(lat);
+	console.log(lng);
+	console.log(loc);
+	console.log(code);
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#scanerr").css("display", "none");
+	$("#map").css("display", "block");
+	//visual mappa
+	$("#mapframe").attr('src',"//maps.google.com/maps?q=@"+lat+", "+lng+"&z=18&t=k&output=embed");
+	$("#mapimg").attr('src',img);
+	$("#loc").html(loc);
+	$("#lastloc").css("display","block");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	console.log("last loc");
+}
+function scanErrorMode(){
+	console.log(img);
+	console.log(lat);
+	console.log(lng);
+	console.log(loc);
+	console.log(code);
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#scanerr").css("display", "block");
+	$("#quizok").css("display", "none");	
+	$("#map").css("display", "block");
+	//visual mappa
+	$("#mapframe").attr('src',"//maps.google.com/maps?q=@"+lat+", "+lng+"&z=18&t=k&output=embed");
+	$("#mapimg").attr('src',img);
+	$("#loc").html(loc);
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	console.log("next loc");
+}
+function certificateMode(){
+	console.log(state);
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#scanerr").css("display", "none");
+	$("#map").css("display", "none");
+	//visual certificato
+	$("#certobj").attr('data',cert);
+	$("#certlnk").attr('href',cert);
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "block");
+	$("#cerrmsg").text("["+thid+"]");
+	$("#cerrmsg").css("display", "block");
+	$("#cerrmod").css("display", "block");
+	console.log("certifcate");
+}
+function pinReceivedMode(){
+	console.log(state);
+	$("#team").val('');
+	$("#ncomp").val('');
+	$("#answer").val('');
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#scanerr").css("display", "block");
+	$("#map").css("display", "none");
+	//visual certificato
+	$("#certobj").attr('data',cert);
+	$("#certlnk").attr('href',cert);
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "block");
+	$("#cerrmsg").text("["+thid+":pin consegnati]");
+	$("#cerrmsg").css("display", "block");
+	$("#cerrmod").css("display", "block");
+	console.log("certifcate");
+}
+function registerUser(){
+	console.log("registering new user");
+	fteam=$("#team").val();
+	fncomp=1;
+	console.log(fteam+" "+fncomp);
+	url=baseurl+"src/apipwabfv24reg.php?team="+fteam;
+	console.log(url);
+    $.ajax(baseurl+"src/apipwabfv24reg.php?team="+fteam).done(regCallback);
+}
+function regCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);		
+		team=data.team;
+		setCookieValue("team",team);	
+		ncomp=data.ncomp;
+		setCookieValue("ncomp",ncomp);	
+		lang=data.lang;
+		setCookieValue("lang",lang);	
+		state=data.state;
+		setCookieValue("state",state);	
+		checklist=data.checklist;
+		console.log("-------------");	
+		i=0;
+		while (i < checklist.length) {
+			vis=checklist[i].vis;
+			visits[i]=vis;
+			chkid="#chk"+i;
+			console.log(chkid);				
+			if(vis==0){
+				$("#chk"+i).prop('checked', false);
+			}
+			else {
+				$("#chk"+i).prop('checked', true);			
+			}
+			console.log(vis);	
+			op=checklist[i].op;
+			opinions[i]=op;
+			console.log(op);	
+  		    console.log("-------------");	
+			i++;
+		}
+		setCookieValue("visits",JSON.stringify(visits));
+		setCookieValue("opinions",JSON.stringify(opinions));		
+		mode=1;
+		setCookieValue("mode",mode);
+		checklistMode();
+    }
+	else {
+	    mode="";
+		setCookieValue("mode",mode);		
+		msg=data.errmsg;
+		notRegisteredMode();
+		$("#errmsg").text(msg);
+		$("#errmod").css("display", "block");
+	}
+}
+function sendAnswer(){
+	console.log("sending quiz answer");
+	fansw=$("#answer").val().toUpperCase();
+	console.log(fansw);
+	if(fansw==correct){
+		console.log("risposta corretta");
+		$("#quizerr").css("display", "none");
+		console.log("request next loc");
+		if(state==7) {
+			reqCertificate();		
+		}
+		else {
+//			reqNextLoc();
+			url=baseurl+"src/apipwafdct24nextloc.php?thid="+thid;
+			console.log(url);
+			$.ajax(baseurl+"src/apipwafdct24nextloc.php?thid="+thid).done(nextLocCallback);
+		}
+	}
+	else {
+		if(fansw==""){
+			console.log("risposta mancante");	
+			$("#quizerrmsg").html("devi selezionare un’opzione");
+			$("#quizerr").css("display", "block");	
+		}
+		else {
+			console.log("risposta sbagliata");	
+			$("#quizerrmsg").html(sugg);
+			$("#quizerr").css("display", "block");
+		}
+	}
+}
+
+function reqArt(n){
+	console.log("requesting "+n+" art");
+	art=n;
+	setCookieValue("art",n);
+	url=baseurl+"src/apipwabfv24reqart.php?thid="+thid+"&art="+n;
+	console.log(url);
+    $.ajax(baseurl+"src/apipwabfv24reqart.php?thid="+thid+"&art="+n).done(reqArtCallback);
+}
+
+function reqArtCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);		
+		state=data.state;
+		setCookieValue("state",state);	
+		lat=data.lat;
+		setCookieValue("lat",lat);	
+		lng=data.lng;
+		setCookieValue("lng",lng);	
+		loc=data.location;
+		setCookieValue("loc",loc);	
+		sugg=data.hint;
+		setCookieValue("sugg",sugg);	
+		img=data.img;
+		setCookieValue("img",img);	
+		code=data.code;
+		setCookieValue("code",code);	
+		mode=2;
+		setCookieValue("mode",mode);
+		nextLocMode();			
+    }
+	else {
+	    mode=1;
+		setCookieValue("mode",mode);			
+		msg=data.errmsg;
+		//notRegisteredMode();
+		$("#merrmsg").text(msg);
+		$("#merrmod").css("display", "block");
+	}
+}
+
+function nextLocCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);		
+		state=data.state;
+		setCookieValue("state",state);	
+		lat=data.lat;
+		setCookieValue("lat",lat);	
+		lng=data.lng;
+		setCookieValue("lng",lng);	
+		loc=data.location;
+		setCookieValue("loc",loc);	
+		sugg=data.hint;
+		setCookieValue("sugg",sugg);	
+		img=data.img;
+		setCookieValue("img",img);	
+		code=data.code;
+		setCookieValue("code",code);	
+		$("#quizok").css("display", "block");
+		mode=2;
+		setCookieValue("mode",mode);
+		if(state==7) {
+			lastLocMode();				
+		}
+		else {
+			nextLocMode();		
+		}	
+    }
+	else {
+	    mode=1;
+		setCookieValue("mode",mode);			
+		msg=data.errmsg;
+		//notRegisteredMode();
+		$("#merrmsg").text(msg);
+		$("#merrmod").css("display", "block");
+	}
+}
+function scanQR(){
+	console.log("start scanner");
+	$("#nteam").html(team);	
+	$("#comp").html("&nbsp;("+ncomp+" componenti)");	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#map").css("display", "none");
+	$("#scan").css("display", "block");
+	$("#cert").css("display", "none");
+    scanner.start();
+}
+function reqNextQuiz(){
+	url=baseurl+"src/apipwafdct24nextquiz.php?thid="+thid;
+	console.log(url);
+	$.ajax(baseurl+"src/apipwafdct24nextquiz.php?thid="+thid).done(nextQuizCallback);
+}
+function reqLocData(){
+	url=baseurl+"src/apipwabfv24locdata.php?thid="+thid+"&art="+art;
+	console.log(url);
+	$.ajax(baseurl+"src/apipwabfv24locdata.php?thid="+thid+"&art="+art).done(reqLocDataCallback);
+}
+
+function reqLocDataCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);	
+		img=data.img;
+		setCookieValue("img",img);	
+		question=data.cmd;
+		console.log(question);
+		setCookieValue("question",question);				
+		correct=data.anw.toUpperCase();
+		setCookieValue("correct",correct);
+		sugg=data.sugg;
+		setCookieValue("sugg",sugg);	
+		mode=1;
+		setCookieValue("mode",mode);				
+		nextQuizMode();		
+    }
+	else {
+	    mode=2;
+		setCookieValue("mode",mode);	
+		msg=data.errmsg;
+		$("#qerrmsg").text(msg);
+		$("#qerrmod").css("display", "block");
+	}
+}
+
+function nextQuizCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);	
+		img=data.img;
+		setCookieValue("img",img);	
+		question=data.cmd;
+		console.log(question);
+		setCookieValue("question",question);				
+		correct=data.anw.toUpperCase();
+		setCookieValue("correct",correct);
+		sugg=data.sugg;
+		setCookieValue("sugg",sugg);	
+		mode=1;
+		setCookieValue("mode",mode);				
+		nextQuizMode();		
+    }
+	else {
+	    mode=2;
+		setCookieValue("mode",mode);	
+		msg=data.errmsg;
+		$("#qerrmsg").text(msg);
+		$("#qerrmod").css("display", "block");
+	}
+}
+function reqCertificate(){
+	url=baseurl+"src/apipwafdct24certficate.php?thid="+thid;
+	console.log(url);
+	$.ajax(baseurl+"src/apipwafdct24certificate.php?thid="+thid).done(certificateCallback);
+}
+function certificateCallback(data){
+	console.log(data.status);
+    if (data.status=='OK'){
+		thid=data.id;
+		setCookieValue("thid",thid);	
+		state=data.state;
+		setCookieValue("state",state);	
+		cert=data.cert;
+		setCookieValue("cert",cert);	
+		time=data.time;
+		setCookieValue("time",time);	
+		mode=3;
+		setCookieValue("mode",mode);
+		certificateMode();		
+    }
+	else {
+	    mode=1;
+		setCookieValue("mode",mode);
+		msg=data.errmsg;
+		$("#cerrmsg").text(msg);
+		$("#cerrmod").css("display", "block");
+	}
+}
+function eachsecond(){
+    // $("#updating").show();
+    // $.ajax(baseurl+"time.php").done(timeCallback);
+    //$.ajax(baseurl+"getkeys.php?keys="+JSON.stringify(keys)).done(refreshKeysCallback);
+}
+function timeCallback(data){
+/*
+    if (data.status=='OK'){
+            var t=data.data;
+            var time=t.hour+':'+t.minute+':'+t.second;
+            $("#time").html(time);
+    }
+    $("#updating").hide();
+*/	
+}
+function info(){
+	$("#aiuto").css("display", "none");
+	$("#reset").css("display", "none");	
+	$("#info").css("display", "block");
+	$("#container").css("display", "none");
+/*
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#map").css("display", "none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	$("#info").css("display", "block");
+	$("#aiuto").css("display", "none");
+	$("#reset").css("display", "none");
+*/	
+}
+function aiuto(){
+	$("#aiuto").css("display", "block");
+	$("#info").css("display", "none");
+	$("#reset").css("display", "none");
+	$("#container").css("display", "none");
+/*	
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#map").css("display", "none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	$("#info").css("display", "none");
+	$("#aiuto").css("display", "block");
+	$("#reset").css("display", "none");
+*/	
+}
+function reset(){
+	$("#reset").css("display", "block");
+	$("#info").css("display", "none");
+	$("#aiuto").css("display", "none");
+	$("#container").css("display", "none");
+	$("#checklist").css("display", "none");
+
+/*
+	$("#userdata").css("display", "block");
+	$("#usermodule").css("display", "none");
+	$("#quiz").css("display", "none");
+	$("#map").css("display", "none");
+	$("#scan").css("display", "none");
+	$("#cert").css("display", "none");
+	$("#info").css("display", "none");
+	$("#aiuto").css("display", "none");
+	$("#reset").css("display", "block");
+*/	
+}
+function closeInfo(){
+	$("#info").css("display", "none");
+	$("#container").css("display", "block");
+//	mainCheckState();
+}
+function closeHelp(){
+	$("#aiuto").css("display", "none");
+	$("#container").css("display", "block");
+//	mainCheckState();
+}
+function abandonReset(){
+	$("#reset").css("display", "none");
+	$("#container").css("display", "block");
+	$("#checklist").css("display", "block");	
+//	mainCheckState();
+}
+function closeReset(){
+	$("#reset").css("display", "none");
+	$("#container").css("display", "block");
+	thid="";
+	team="";
+	ncomp="";
+	state="";
+	lang="it";
+	question="";
+	correct="";
+	sugg="";
+	img="";
+	lat="";
+	lng="";
+	loc="";
+	code="";
+	Cert="";
+	time="";	
+	mode="";	
+	setCookieValue("thid","");
+	setCookieValue("team","");
+	setCookieValue("ncomp","");
+	setCookieValue("state","");
+	setCookieValue("lang","it");
+	setCookieValue("correct","");
+	setCookieValue("question","");
+	setCookieValue("sugg","");
+	setCookieValue("img","");
+	setCookieValue("lat","");
+	setCookieValue("lng","");
+	setCookieValue("loc","");
+	setCookieValue("code","");
+	setCookieValue("cert","");
+	setCookieValue("time","");
+	setCookieValue("mode","");	
+	mainCheckState();
+}
+
+function chiudi(){
+    console.log("closing");
+	window.close();
+}
+</script>
+</div>
+</div>
+<!-- sempre visibile -->
+<div id="footer">
+<p>Realizzato da IIS Belluzzi Fioravanti con licenza MIT</p>
+</div>
+</body>
